@@ -1,6 +1,6 @@
 {
-  "name": "Ordinario",
-  "short_name": "Ordinario",
+  "name": "Ordinario Ifiur",
+  "short_name": "Ordinario Ifiur",
   "description": "Foto della scheda ordine, lettura e card su Trello",
   "start_url": "./",
   "scope": "./",

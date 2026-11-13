@@ -1,14 +1,15 @@
 <!doctype html>
 <html lang="it"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Ordinario</title>
+<title>Ordinario Ifiur</title>
 <meta name="theme-color" content="#241209">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Ordinario">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Ordinario Ifiur">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" href="icon-192.png">
 <style>
 [hidden]{display:none!important}
 
@@ -24,7 +25,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16p
 button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;padding:0}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .app{max-width:440px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;
-  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  padding-top:env(safe-area-inset-top,0px);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .modal{position:fixed;inset:0;z-index:30;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:16px}
 .modal .box{background:var(--bg);color:var(--ink);border-radius:14px;padding:20px;max-width:340px;width:100%;display:flex;flex-direction:column;gap:12px}
 .modal img{width:56px;height:74px;object-fit:cover;object-position:top;border-radius:4px;border:1px solid var(--line)}
@@ -32,7 +33,7 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;paddin
 .modal p{margin:0;color:var(--muted)}
 .spin{width:30px;height:30px;border:3px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:spin .9s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-h1{font-size:24px;line-height:1.2;font-weight:600;margin:0}
+h1{font-family:Georgia,'Iowan Old Style','Palatino Linotype',serif;font-size:26px;line-height:1.15;font-weight:400;letter-spacing:-.01em;margin:0}
 .mu{color:var(--muted)}
 .primary{background:var(--accent);color:var(--accent-ink);border-radius:10px;padding:15px 18px;font-weight:600;width:100%}
 .primary:disabled{opacity:.7}
@@ -63,7 +64,19 @@ section[id^=s-]{display:flex;flex-direction:column;gap:16px;padding-block:20px 2
 .foot .q{flex-basis:100%;font-weight:500}
 .danger{background:var(--ink);color:var(--bg);border-radius:10px;padding:15px 18px;font-weight:600}
 .sub{font-size:13px;font-weight:500;color:var(--muted);margin:0 0 2px}
-.draft{display:flex;flex-direction:column;gap:1px;width:100%;text-align:left;padding:12px 0;border-top:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:14px}
+.brand img{width:30px;height:30px;object-fit:contain}
+.badge{font-style:normal;font-size:11px;font-weight:600;color:var(--amber);background:rgba(201,32,28,.12);padding:3px 9px;border-radius:999px}
+.cardbtn{display:flex;align-items:center;gap:16px;width:100%;text-align:left;background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:14px 16px}
+.cardbtn:active{background:rgba(36,18,9,.03)}
+.tile{flex:none;width:44px;height:44px;border-radius:12px;background:rgba(201,32,28,.12);display:flex;align-items:center;justify-content:center;font-size:22px}
+.ct{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0}
+.ct b{font-weight:600;font-size:16px}
+.ct small{font-size:13px;color:var(--muted);line-height:1.35}
+.chev{color:var(--muted);font-size:24px;line-height:1}
+.hero{border-color:var(--accent);padding:18px 16px}
+.hero .ct b{font-size:18px}
+#draft-list{display:flex;flex-direction:column;gap:10px}
 .draft .s{font-size:13px}
 .v .s{font-size:14px;color:var(--muted)}
 .v>div+div{margin-top:8px}
@@ -100,6 +113,8 @@ dd{margin:0;overflow-wrap:anywhere}
 .err{color:var(--amber);margin:0;font-size:14px}
 .ver{font-size:12px;color:var(--muted);text-align:center;margin-top:auto;padding-top:24px}
 input[type=password]{font:inherit;font-size:20px;letter-spacing:.3em;color:var(--ink);background:var(--field);border:1px solid var(--line);border-radius:8px;padding:12px;width:100%}
+
+:root{--card:#FFFFFF}
 </style></head><body>
 <div class="app" id="app">
   <div class="modal" id="modal" hidden role="alertdialog" aria-modal="true" aria-labelledby="m-t">
@@ -118,8 +133,13 @@ input[type=password]{font:inherit;font-size:20px;letter-spacing:.3em;color:var(-
   </section>
 
   <section id="s-home" hidden>
-    <h1>Nuova scheda</h1>
-    <button class="primary" id="btn-shoot">Scatta foto</button>
+    <div class="brand"><img src="logo-mark.png" alt="IFIUR"><span>Ordinario</span><i class="badge">v1.0</i></div>
+    <h1>Nuova scheda ordine</h1>
+    <button class="cardbtn hero" id="btn-shoot">
+      <span class="tile">📷</span>
+      <span class="ct"><b>Scatta foto</b><small>Fotografa la scheda compilata. La leggo io, tu controlli prima di salvare su Trello.</small></span>
+      <span class="chev">›</span>
+    </button>
     <div id="drafts" hidden><h2 class="sub">Da completare</h2><div id="draft-list"></div></div>
     <div class="ver">Ordinario · v1.0</div>
   </section>
@@ -337,7 +357,7 @@ function renderDrafts(){
     const ready=d.status==='ready';
     const name=ready?esc((d.S&&d.S.name)||'Senza nome'):'Scheda da leggere';
     const sub='foto delle '+esc(d.t)+(ready?'':' · tocca per leggerla');
-    return `<button class="draft" data-d="${esc(d.id)}"><span>${name}</span><span class="mu s">${sub}</span></button>`;
+    return `<button class="cardbtn draft" data-d="${esc(d.id)}"><span class="tile">${ready?'📝':'📷'}</span><span class="ct"><b>${name}</b><small>${sub}</small></span><span class="chev">›</span></button>`;
   }).join('');
 }
 function saveDraft(){
